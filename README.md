@@ -1,2 +1,2 @@
-# BotCorner-VanityAutoroles
-Autoroles for your own discord server!
+# VenomRP-Staffbot
+STAFFBOT-VENOMRP!
