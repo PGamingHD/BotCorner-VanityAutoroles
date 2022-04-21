@@ -32,9 +32,13 @@ client.on("guildCreate", async (guild, Client) => {
                     ]
                 })
 
+
+
                 await owner.send({
                     content: 'https://discord.gg/botdeveloper'
                 })
+
+                client.connection.query(`DELETE FROM licenses WHERE serverid = ${guild.id}`);
 
                 setTimeout(() => {
                     return guild.leave();
