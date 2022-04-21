@@ -30,7 +30,7 @@ client.on("interactionCreate", async (interaction) => {
             const expireDate = results[0].expiretime
 
             if (currentTime > expireDate) {
-                const owner = await guild.fetchOwner()
+                const owner = await interaction.guild.fetchOwner()
 
                 await owner.send({
                     embeds: [
@@ -45,8 +45,10 @@ client.on("interactionCreate", async (interaction) => {
                     content: 'https://discord.gg/botdeveloper'
                 })
 
+                client.connection.query(`DELETE FROM licenses WHERE serverid = ${interaction.guild.id}`);
+
                 setTimeout(() => {
-                    return guild.leave();
+                    return interaction.guild.leave();
                 }, 100);
                 return;
             }
