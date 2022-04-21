@@ -20,9 +20,6 @@ client.on("guildDelete", async (guild, client) => {
         return;
     }
     */
-    return webhook.send({
-        content: `${emoji.error} I was just removed from a guild.`
-    })
 });
 
 /*

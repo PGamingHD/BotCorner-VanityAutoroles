@@ -1,23 +1,95 @@
 const {
     Message,
     MessageEmbed,
-    WebhookClient
+    WebhookClient,
+    EmbedBuilder
 } = require("discord.js");
 const emoji = require("../botconfig/emojis.json")
 const ee = require("../botconfig/embed.json");
 const config = require("../botconfig/config.json");
 const client = require("../index");
+const {
+    connection
+} = require("../index");
 
-client.on("guildCreate", async (guild, client) => {
-    /*
-    const findBlacklist = await blacklist.findOne({
-        guildID: guild.id,
-    })
-    if (findBlacklist) {
-        guild.leave();
-        return;
-    }
-    */
+client.on("guildCreate", async (guild, Client) => {
+
+    client.connection.query(`SELECT * FROM licenses WHERE serverid = ${guild.id}`, async (error, results, fields) => {
+        if (error) throw error;
+        if (results && results.length) {
+            const currentTime = Date.now()
+            const expireDate = results[0].expiretime
+
+            if (currentTime > expireDate) {
+                const owner = await guild.fetchOwner()
+
+                await owner.send({
+                    embeds: [
+                        new EmbedBuilder()
+                        .setColor(ee.color)
+                        .setTitle(`:x: License key expired :x:`)
+                        .setDescription(`***Hello there, someone just tried to invite me but it looks like your license key has expired.\nI'm very sorry that this is the case, please upgrade your key before trying again.\n\nStill having issues with this? Please contact support over at our support server found below!***`)
+                    ]
+                })
+
+                await owner.send({
+                    content: 'https://discord.gg/botdeveloper'
+                })
+
+                setTimeout(() => {
+                    return guild.leave();
+                }, 100);
+                return;
+            }
+
+            client.connection.query(`SELECT * FROM server_info WHERE serverid = ${guild.id}`, async (error, results, fields) => {
+                if (error) throw error;
+                if (results && results.length) {
+                    const owner = await guild.fetchOwner()
+
+                    await owner.send({
+                        embeds: [
+                            new EmbedBuilder()
+                            .setColor(ee.color)
+                            .setTitle(`:white_check_mark: Successfully Authenticated :white_check_mark:`)
+                            .setDescription(`***Hello there Server Owner, I was successfully invited and your key is valid. Please setup me by using the commands: \`/setupchannel\`, \`/setuprole\`, \`/setupvanity\` & \`/enable\` correctly. There are descriptions on how these are used or check out the support server for further help @ discord.gg/botdeveloper***`)
+                        ]
+                    })
+                    return;
+                } else {
+                    const owner = await guild.fetchOwner()
+
+                    await owner.send({
+                        embeds: [
+                            new EmbedBuilder()
+                            .setColor(ee.color)
+                            .setTitle(`:white_check_mark: Successfully Authenticated :white_check_mark:`)
+                            .setDescription(`***Hello there Server Owner, I was successfully invited and your key is valid. Please setup me by using the commands:*** \`/Setupchannel\`, \`/Setuprole\`, \`/Setupvanity\` then enable the bot with \`/enable\``)
+                        ]
+                    })
+                    client.connection.query(`INSERT INTO server_info (serverid,roleid,channelid,vanity,enabled) VALUES ('${guild.id}',0,0,'default',0);`)
+                    return;
+                }
+            })
+
+        } else {
+            const owner = await guild.fetchOwner()
+            await owner.send({
+                embeds: [
+                    new EmbedBuilder()
+                    .setColor(ee.color)
+                    .setTitle(`:x: Guild not Whitelisted :x:`)
+                    .setDescription(`***Hello there, someone just tried to invite me but I have not been whitelisted to this guild yet.\nPlease make sure to redeem a key and whitelist the correct guild.\n\nStill having issues with this? Please contact support over at our support server found below!***`)
+                ]
+            })
+            await owner.send({
+                content: 'https://discord.gg/botdeveloper'
+            })
+            setTimeout(() => {
+                return guild.leave();
+            }, 100);
+        }
+    });
 });
 
 /*

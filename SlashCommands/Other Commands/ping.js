@@ -15,7 +15,6 @@ const {
 module.exports = {
     name: 'ping',
     description: 'Get the current bot, api & database ping!',
-    category: 'Other',
     /** 
      * @param {Client} client 
      * @param {Message} message 

@@ -21,7 +21,6 @@
     module.exports = {
         name: 'sendbutton',
         description: 'Send out the interaction button!',
-        category: 'Administration',
         /** 
          * @param {Client} client 
          * @param {Message} message 

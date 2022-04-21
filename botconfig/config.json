@@ -1,13 +1,13 @@
 {
     "adminID": ["1", "2"],
     "ownerID": ["266726434855321600"],
-    "token": "OTU3NzcxMjM1MTY3NzAzMDQx.YkDn-A.yLom2HExtXxj0qh5bsFc9hg-7tg",
-    "prefix": "s!",
+    "token": "OTY2NDE1MzU2MTUzNDU4Nzk4.YmBacA.6iCFUiqfxRxde7oxBMHdX4975zQ",
+    "prefix": "/",
     "botID": "957771235167703041",
     "botVersion": "v1.0.0",
     "logChannel": "963775182332371014",
     "status": {
-        "text": "VenomRP",
+        "text": "Bot Corner",
         "type": "PLAYING",
         "COMMENT:": "TYPES ARE: PLAYING, STREAMING, WATCHING, LISTENING",
         "url": "https://twitch.tv/PGamingJR"
@@ -16,6 +16,6 @@
         "DB_USER": "VSCode",
         "DB_PASS": "Yourmomgay123",
         "DB_HOST": "127.0.0.1",
-        "DB_DATABASE": "fivem-template"
+        "DB_DATABASE": "vanity_autoroles"
      }
 }
