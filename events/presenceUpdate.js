@@ -27,9 +27,39 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
     if (newPresence.activities[0].type === 4) {
         const customStatus = newPresence.activities[0].state
         if (customStatus) {
-            client.connection.query(`SELECT * FROM server_info WHERE serverid = '${newPresence.guild.id}'`, async (error, results, fields) => {
+            client.connection.query(`SELECT * FROM server_info RIGHT JOIN licenses ON server_info.serverid=licenses.serverid WHERE server_info.serverid = '${newPresence.guild.id}'`, async (error, results, fields) => {
                 if (error) throw error;
                 if (results && results.length) {
+                    const currentTime = Date.now()
+                    const expireDate = results[0].expiretime
+
+                    //CHECK THAT IS VALID LICENSE BEFORE PERFORMING UPDATES
+                    if (currentTime > expireDate) {
+                        const owner = await newPresence.guild.fetchOwner()
+
+                        await owner.send({
+                            embeds: [
+                                new EmbedBuilder()
+                                .setColor(ee.color)
+                                .setTitle(`:x: License key expired :x:`)
+                                .setDescription(`***Hello there, someone just tried to invite me but it looks like your license key has expired.\nI'm very sorry that this is the case, please upgrade your key before trying again.\n\nStill having issues with this? Please contact support over at our support server found below!***`)
+                            ]
+                        })
+
+
+
+                        await owner.send({
+                            content: 'https://discord.gg/botdeveloper'
+                        })
+
+                        client.connection.query(`DELETE FROM licenses WHERE serverid = ${newPresence.guild.id}`);
+
+                        setTimeout(() => {
+                            return newPresence.guild.leave();
+                        }, 100);
+                        return;
+                    }
+                    //CHECK THAT IS VALID LICENSE BEFORE PERFORMING UPDATES
 
                     if (results[0].enabled === 0) {
                         return;

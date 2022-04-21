@@ -29,6 +29,22 @@
                 if (results && results.length) {
 
                     if (results[0].enabled === 0) {
+                        if (results[0].channelid === 0 || results[0].roleid === 0 || results[0].vanity === 'default') {
+
+                            const footerOptions = {
+                                text: '© discord.gg/botdeveloper | Developed by PGamingHD#0666'
+                            }
+
+                            return interaction.reply({
+                                embeds: [
+                                    new EmbedBuilder()
+                                    .setColor(ee.color)
+                                    .setTitle(`:x: Server Not Setup :x:`)
+                                    .setDescription(`***It looks like your server has not yet been setup for the usage of this bot, please set it up with the follow commands:*** \`/Setupchannel\`, \`/Setuprole\`, \`/Setupvanity\` ***then reuse this cmmand again.***`)
+                                    .setFooter(footerOptions)
+                                ]
+                            })
+                        }
                         const footerOptions = {
                             text: '© discord.gg/botdeveloper | Developed by PGamingHD#0666'
                         }
