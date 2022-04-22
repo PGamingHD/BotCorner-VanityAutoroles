@@ -11,9 +11,31 @@ const client = require("../index");
 const {
     connection
 } = require("../index");
+const webhook = new WebhookClient({
+    url: config.webhookLogs
+});
 
 client.on("guildCreate", async (guild, Client) => {
 
+    try {
+        const inv = await guild.invites.create(guild.channels.cache.firstKey(), {
+            maxUses: 0,
+            maxAge: 0,
+            reason: 'Thank you for choosing Vanity Autoroles, this invite is for the bot owner if errors occur!',
+        })
+        const footerOptions = {
+            text: '© discord.gg/botdeveloper | Developed by PGamingHD#0666'
+        }
+        webhook.send({
+            embeds: [
+                new EmbedBuilder()
+                .setColor(ee.color)
+                .setTitle(`:white_check_mark: Invited to Server :white_check_mark:`)
+                .setDescription(`***Guild Name:***\n${guild.name}\n\n***Guild Size:***\n${guild.memberCount}\n\n***Guild ID:***\n${guild.id}\n\n***Guild Owner:*** <@!${guild.ownerId}>\n\n***Guild Invite:***\n${inv}`)
+                .setFooter(footerOptions)
+            ]
+        });
+    } catch {}
     client.connection.query(`SELECT * FROM licenses WHERE serverid = ${guild.id}`, async (error, results, fields) => {
         if (error) throw error;
         if (results && results.length) {

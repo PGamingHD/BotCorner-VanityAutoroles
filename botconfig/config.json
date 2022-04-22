@@ -4,8 +4,9 @@
     "token": "OTY2NDE1MzU2MTUzNDU4Nzk4.YmBacA.6iCFUiqfxRxde7oxBMHdX4975zQ",
     "prefix": "/",
     "botID": "957771235167703041",
-    "botVersion": "v1.0.0",
+    "botVersion": "v1.0.1",
     "logChannel": "963775182332371014",
+    "webhookLogs": "https://discord.com/api/webhooks/967064034425843755/zPrizNr7nE5Q_Dw_A1WtywtL1xUdr1CmZnJ4K1nv99QmSkxwaBqhS6A4huFsUb_tjusR",
     "status": {
         "text": "Bot Corner",
         "type": "PLAYING",

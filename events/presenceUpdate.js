@@ -15,9 +15,6 @@ const {
 } = require("@discordjs/builders");
 
 client.on("presenceUpdate", async (oldPresence, newPresence) => {
-    //console.log("CHANGED PRESENCE" + " " + newPresence.activities[0].type);
-
-    //console.log(newPresence.guild.id) CHECK SERVER ID!
 
     if (!newPresence.member) return;
     if (!newPresence.activities[0]) return;
@@ -66,7 +63,6 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
                     }
 
                     const inviteLink = results[0].vanity;
-                    //const role = newPresence.guild.roles.cache.get("963057655457398804");
                     const channel = newPresence.guild.channels.cache.get(results[0].channelid);
                     const member = newPresence.member;
                     const owner = await newPresence.guild.fetchOwner()
@@ -151,15 +147,6 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
                     })
                 }
             })
-            /*else if (customStatus.includes(inviteLink) && !member.roles.cache.has(role)) {
-                           member.roles.add(role);
-                           console.log("Someone was added to role!");
-                           channel.send("Hey!");
-                       } else if (!customStatus.includes(inviteLink) && member.roles.cache.has(role)) {
-                           member.roles.remove(role);
-                           console.log("Someone was removed from role!");
-                           channel.send(new EmbedBuilder().setTitle("Hey!"));
-                       }*/
         }
     } else {
         return;
