@@ -15,7 +15,7 @@
 
     module.exports = {
         name: 'information',
-        description: 'Display some important information about VenomRP!',
+        description: 'Display some important information about Bot Corner!',
         /** 
          * @param {Client} client 
          * @param {Message} message 
