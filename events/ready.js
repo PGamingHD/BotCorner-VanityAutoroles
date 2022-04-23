@@ -10,6 +10,9 @@ const config = require("../botconfig/config.json");
 const emoji = require("../botconfig/emojis.json");
 const schedule = require("node-schedule");
 const prettyMilliseconds = require("pretty-ms")
+const {
+    ActivityType
+} = require("discord.js");
 
 client.on("ready", async (client) => {
     try {
@@ -19,11 +22,12 @@ client.on("ready", async (client) => {
         } catch {
             /* */
         }
-        change_status(client);
-        //loop through the status per each 10 minutes
-        setInterval(() => {
-            change_status(client);
-        }, 1000 * 60 * 10);
+
+        client.user.setActivity(config.status.text, {
+            type: ActivityType.Watching,
+            url: config.status.url
+        })
+
     } catch (e) {
         console.log(String(e.stack))
     }
