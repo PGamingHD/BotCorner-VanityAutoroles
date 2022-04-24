@@ -28,12 +28,16 @@ const client = new Client({
     },
 
     intents: [
-        "Guilds",
-        "GuildMembers",
-        "GuildBans",
-        "GuildMessages",
-        "DirectMessages",
-        "GuildPresences"
+        IntentsBitField.Flags.Guilds,
+        IntentsBitField.Flags.GuildMembers,
+        IntentsBitField.Flags.GuildBans,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.DirectMessages,
+        IntentsBitField.Flags.GuildPresences,
+    ],
+
+    partials: [
+        Partials.ActivityType,
     ],
 });
 discordModals(client);

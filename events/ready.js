@@ -1,15 +1,6 @@
 const client = require("../index");
-const {
-    change_status
-} = require("../handler/functions");
-const {
-    evaluate,
-    random
-} = require("mathjs");
 const config = require("../botconfig/config.json");
-const emoji = require("../botconfig/emojis.json");
 const schedule = require("node-schedule");
-const prettyMilliseconds = require("pretty-ms")
 const {
     ActivityType
 } = require("discord.js");
