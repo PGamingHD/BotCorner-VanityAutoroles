@@ -5,7 +5,8 @@ const {
     Collection,
     Intents,
     GatewayIntentBits,
-    Partials
+    Partials,
+    IntentsBitField
 } = require("discord.js");
 const {
     readdirSync
