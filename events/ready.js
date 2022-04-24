@@ -28,6 +28,11 @@ client.on("ready", async (client) => {
             url: config.status.url
         })
 
+        const job = schedule.scheduleJob('* 0 */1 * * *', function (fireKeepup) {
+            client.connection.query(`USE vanity_autoroles; SELECT 0;`)
+            console.log("[DATABASE] - Fired upkeep request for database!")
+        })
+
     } catch (e) {
         console.log(String(e.stack))
     }

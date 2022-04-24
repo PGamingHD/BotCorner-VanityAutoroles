@@ -77,7 +77,7 @@ const con = mysql.createConnection({
 
 con.connect(err => {
     if (err) throw err;
-    console.log("Successfully connected to the MySQL Database!")
+    console.log("[DATABASE] - Successfully connected to the MySQL Database!")
     //con.query("SHOW TABLES", console.log)
 });
 
