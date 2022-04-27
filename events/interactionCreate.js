@@ -143,30 +143,6 @@ client.on("interactionCreate", async (interaction) => {
                     channel,
                     message
                 } = interaction;
-
-                if (interaction?.customId == "verifyModalButton") {
-
-                    global.randomNumber1 = Math.floor(Math.random() * 25) + 1;
-                    global.randomNumber2 = Math.floor(Math.random() * 25) + 1;
-
-                    const modal = new Modal()
-                        .setCustomId('verifyModal')
-                        .setTitle('VenomRP Verification')
-                        .addComponents(
-                            new TextInputComponent() // We create a Text Input Component
-                            .setCustomId('verificationInput')
-                            .setLabel('What is ' + randomNumber1 + " + " + randomNumber2 + "?")
-                            .setStyle('SHORT') //IMPORTANT: Text Input Component Style can be 'SHORT' or 'LONG'
-                            .setMinLength(1)
-                            .setMaxLength(2)
-                            .setPlaceholder('Write your answer here')
-                            .setRequired(true) // If it's required or not
-                        );
-                    showModal(modal, {
-                        client: client,
-                        interaction: interaction,
-                    });
-                }
             }
 
         } else {
