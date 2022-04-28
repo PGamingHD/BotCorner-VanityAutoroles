@@ -30,7 +30,7 @@ module.exports = {
             await interaction.reply({
                 embeds: [
                     embed.setColor(ee.color)
-                    .addFields({
+                    .addFields([{
                         name: 'Bot Latency',
                         value: `\`\`\`re\n[ ${Math.floor((Date.now() - interaction.createdTimestamp) - 2 * Math.floor(client.ws.ping))}ms ]\`\`\``,
                         inline: true
@@ -38,7 +38,7 @@ module.exports = {
                         name: 'API Latency',
                         value: `\`\`\`re\n[ ${Math.floor(client.ws.ping)}ms ]\`\`\``,
                         inline: true
-                    }, )
+                    }, ])
                     .setFooter(footerOptions)
                 ]
             })
