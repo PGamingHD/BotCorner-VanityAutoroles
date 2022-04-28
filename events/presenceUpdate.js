@@ -101,7 +101,8 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
                                     .setDescription(`<@${newPresence.member.id}> has added the vanity \`${results[0].vanity}\` into their status!`)
                                     .setFooter(footerOptions)
                                     .setTimestamp()
-                                ]
+                                ],
+                                content: `${newPresence.member}`
                             })
                         }
                         return;
@@ -124,7 +125,8 @@ client.on("presenceUpdate", async (oldPresence, newPresence) => {
                                     .setDescription(`<@${newPresence.member.id}> has removed the vanity \`${results[0].vanity}\` from their status!`)
                                     .setFooter(footerOptions)
                                     .setTimestamp()
-                                ]
+                                ],
+                                content: `${newPresence.member}`
                             })
                         }
                         return;
